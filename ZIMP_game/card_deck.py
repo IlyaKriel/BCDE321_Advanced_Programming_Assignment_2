@@ -9,17 +9,16 @@ class CardDeck:
         self.card_deck = []
         self.deck_counter = 0
         self.discarded_cards = []
+        self.current_card_drawn = None
 
     def add_card_to_card_deck(self, image_number, event_9pm, event_10pm, event_11pm):
         card = Card(image_number, event_9pm, event_10pm, event_11pm)
         self.card_deck.append(card)
         self.deck_counter = len(self.card_deck)
 
-    # need to draw a card (a random card)
-    def get_card_event(self):
-        # while the card is not in the discarded_cards return the card event == doom_counter
-        # select a random card from the deck
-        # get a random number 0-8
+    def return_card_if_not_discarded(self):
+        # while the card is not in the discarded_cards return the card event
+        # select a random card from the deck by using a random number for index selection.
 
         while True:
             random_number = random.randint(0, 8)
@@ -31,15 +30,26 @@ class CardDeck:
                 self.discarded_cards.append(random_card)
                 # reduce the number of cards available to draw from
                 self.reduce_deck_counter()
-                return random_card.get_event(self.doom_clock)
+                return random_card
 
-    def get_card_item(self, discard_card):
-        # if discard a card to get an item -> add card to the discarded_cards & reduce_deck_counter
-        if discard_card:
+    # need to draw a card (a random card)
+    def get_card_event(self):
+        random_card = self.return_card_if_not_discarded()
+        if random_card.get_event(self.doom_clock) == "Item":
+            return self.get_card_item(False, random_card)
+        else:
+            return random_card.get_event(self.doom_clock)
 
-        # else get random card not in discarded_cards to return the card item
-        # & then add card to the discarded_cards & reduce_deck_counter
-        pass
+
+    def get_card_item(self, draw_for_item, current_card = None):
+        # get a card that hasn't been drawn/discarded
+        # player chooses to draw a new card for an item
+        if draw_for_item:
+            random_card = self.return_card_if_not_discarded()
+            return random_card.get_item()
+        else:
+            # player recieved an item from an event item being drawn
+            return current_card.get_item()
 
     # reduce the deck_counter on player action
     def reduce_deck_counter(self):
