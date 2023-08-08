@@ -9,7 +9,6 @@ class CardDeck:
         self.card_deck = []
         self.deck_counter = 0
         self.discarded_cards = []
-        self.current_card_drawn = None
 
     def add_card_to_card_deck(self, image_number, event_9pm, event_10pm, event_11pm):
         card = Card(image_number, event_9pm, event_10pm, event_11pm)
