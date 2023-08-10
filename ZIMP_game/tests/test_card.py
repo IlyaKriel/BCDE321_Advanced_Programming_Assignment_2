@@ -25,3 +25,5 @@ class TestCardCode:
     def test_get_item_image(self):
         card = Card("1", "Don't pee yourself", "Item", "6 zombies")
         card.set_item("Chainsaw", 2, 3)
+        image = card.get_item_image()
+        assert image is not None

@@ -27,4 +27,4 @@ class Card:
         return self.item
 
     def get_item_image(self):
-        return self.image.show()
+        return self.image
