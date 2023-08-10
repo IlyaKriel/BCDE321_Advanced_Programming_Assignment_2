@@ -3,6 +3,7 @@ from models.item import Item
 
 class TestItemCode:
 
+    # basic tests for the Item class
     def test_get_item_name(self):
         item = Item("chainsaw", 2, 3)
         item_name = item.get_item_name()

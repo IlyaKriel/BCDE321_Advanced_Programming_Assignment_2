@@ -25,3 +25,6 @@ class Card:
     
     def get_item(self):
         return self.item
+
+    def get_item_image(self):
+        self.image.show()
