@@ -1,5 +1,5 @@
-from item import Item
 from PIL import Image
+from models.item import Item
 
 
 class Card:
@@ -8,7 +8,7 @@ class Card:
         self.event_9pm = event_9pm
         self.event_10pm = event_10pm
         self.event_11pm = event_11pm
-        self.image = Image.open(f'images/card_{image_number}.jpg')
+        self.image = Image.open(f'../images/card_{image_number}.JPG')
         self.item = None
         
     def set_item(self, item_name, uses, attack_modifier):
@@ -27,4 +27,4 @@ class Card:
         return self.item
 
     def get_item_image(self):
-        self.image.show()
+        return self.image.show()
