@@ -1,14 +1,17 @@
 from PIL import Image
-from models.item import Item
+from item import Item
 
 
 class Card:
-    
+
+    FILE_LOCATION = "../images/card_"
+    FILE_EXTENSION = ".JPG"
+
     def __init__(self, image_number, event_9pm, event_10pm, event_11pm):
         self.event_9pm = event_9pm
         self.event_10pm = event_10pm
         self.event_11pm = event_11pm
-        self.image = Image.open(f'../images/card_{image_number}.JPG')
+        self.image = Image.open("%s%s%s" % (Card.FILE_LOCATION, image_number, Card.FILE_EXTENSION))
         self.item = None
         
     def set_item(self, item_name, uses, attack_modifier):

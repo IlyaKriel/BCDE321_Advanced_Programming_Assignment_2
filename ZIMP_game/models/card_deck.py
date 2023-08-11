@@ -39,8 +39,7 @@ class CardDeck:
         else:
             return random_card.get_event(self.doom_clock)
 
-
-    def get_card_item(self, draw_for_item, current_card = None):
+    def get_card_item(self, draw_for_item, current_card=None):
         # get a card that hasn't been drawn/discarded
         # player chooses to draw a new card for an item
         if draw_for_item:
