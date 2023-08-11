@@ -1,5 +1,5 @@
 from PIL import Image
-from item import Item
+from ZIMP_game.models.item import Item
 
 
 class Card:

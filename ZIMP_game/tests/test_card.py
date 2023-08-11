@@ -1,4 +1,4 @@
-from models.card import Card
+from ZIMP_game.models.card import Card
 
 
 class TestCardCode:

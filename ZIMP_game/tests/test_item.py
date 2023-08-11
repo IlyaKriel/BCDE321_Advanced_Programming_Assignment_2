@@ -1,4 +1,4 @@
-from models.item import Item
+from ZIMP_game.models.item import Item
 
 
 class TestItemCode:
