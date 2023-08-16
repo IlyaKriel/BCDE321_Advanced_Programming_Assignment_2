@@ -14,16 +14,21 @@ class CardDeck:
         self.discarded_cards = []
         self.item_event = CardDeck.GET_ITEM_EVENT
 
-    def add_card_to_card_deck(self, image_number, event_9pm, event_10pm, event_11pm):
-        card = Card(image_number, event_9pm, event_10pm, event_11pm)
+    def add_card_to_card_deck(self, image_number):
+        card = Card(image_number)
         self.deck.append(card)
         self.deck_counter = len(self.deck)
 
     def add_card_to_discarded_cards(self):
-        random_number = randrange(len(self.deck))
-        random_card = self.deck[random_number]
-        self.discarded_cards.append(random_card)
-        self.reduce_deck_counter()
+        while True:
+            random_number = randrange(len(self.deck))
+            random_card = self.deck[random_number]
+            discarded_card = next((card for card in self.discarded_cards if card == random_card), None)
+
+            if discarded_card != random_card:
+                self.discarded_cards.append(random_card)
+                self.reduce_deck_counter()
+                break
 
     def get_card_if_not_discarded(self):
         # while the card is not in the discarded_cards return the card
@@ -68,6 +73,7 @@ class CardDeck:
     def increase_doom_clock_counter_or_end(self):
         if self.doom_clock < 12:
             self.doom_clock += 1
+            self.discarded_cards.clear()
         else:
             return f'The clock strikes {self.doom_clock}pm! You die!'
 
