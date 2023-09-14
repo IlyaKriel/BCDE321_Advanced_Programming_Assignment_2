@@ -1,9 +1,12 @@
 class Player:
 
+    INITIAL_PLAYER_HEALTH = 6
+    INITIAL_PLAYER_ATTACK = 1
+
     # constructor
-    def __init__(self, attack, health):
-        self.attack = attack
-        self.health = health
+    def __init__(self):
+        self.attack = Player.INITIAL_PLAYER_ATTACK
+        self.health = Player.INITIAL_PLAYER_HEALTH
         # empty list to store players items
         self.inventory = []
         self.found_totem = False

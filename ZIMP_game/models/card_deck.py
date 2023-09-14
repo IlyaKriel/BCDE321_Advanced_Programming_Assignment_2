@@ -5,14 +5,14 @@ from random import randrange
 class CardDeck:
 
     DOOM_CLOCK_START_TIME = 9
-    GET_ITEM_EVENT = "Item"
+    ITEM_EVENT = "Item"
 
     def __init__(self):
         self.doom_clock = CardDeck.DOOM_CLOCK_START_TIME
         self.deck = []
         self.deck_counter = len(self.deck)
         self.discarded_cards = []
-        self.item_event = CardDeck.GET_ITEM_EVENT
+        self.item_event = CardDeck.ITEM_EVENT
 
     def add_card_to_card_deck(self, image_number):
         card = Card(image_number)
@@ -46,12 +46,8 @@ class CardDeck:
                 self.reduce_deck_counter()
                 return random_card
 
-    def get_card_event(self):
-        random_card = self.get_card_if_not_discarded()
-        if random_card.get_event(self.doom_clock) == self.item_event:
-            return "Optional: draw new card for item"
-        else:
-            return random_card.get_event(self.doom_clock)
+    def get_card_event(self, card):
+        return card.get_event(self.doom_clock)
 
     def get_card_item(self):
         # get a card that hasn't been drawn/discarded
@@ -59,13 +55,18 @@ class CardDeck:
         random_card = self.get_card_if_not_discarded()
         return random_card.get_item()
 
+    # gets the specific card from the deck
+    def find_card_that_matches_image_number(self, image_number):
+        update_card = next((card for card in self.deck if card.get_image_number() == image_number), None)
+        return update_card
+
     # reduce the deck_counter on player action
     def reduce_deck_counter(self):
         if self.deck_counter > 0:
             self.deck_counter -= 1
         else:
             # reset the deck_counter and increase the doom clock
-            self.deck_counter = len(self.deck)
+            self.deck_counter = len(self.deck) - 2
             # deck_counter = deck_size
             self.increase_doom_clock_counter_or_end()
 
@@ -79,4 +80,4 @@ class CardDeck:
 
     # return the doom_clock as a string to display to the player
     def get_doom_clock(self):
-        return f'{self.doom_clock}pm'
+        return self.doom_clock

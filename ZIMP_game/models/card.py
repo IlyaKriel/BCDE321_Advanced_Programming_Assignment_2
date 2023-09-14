@@ -13,6 +13,7 @@ class Card:
         self.event_9pm = None
         self.event_10pm = None
         self.event_11pm = None
+        self.image_number = image_number
         self.image = Image.open("%s%s%s" % (Card.FILE_LOCATION, image_number, Card.FILE_EXTENSION))
         self.item = None
 
@@ -27,8 +28,8 @@ class Card:
                 self.event_11pm = event
         pass
 
-    def set_item(self, item_name, uses, attack_modifier):
-        self.item = Item(item_name, uses, attack_modifier)
+    def set_item(self, item_name, uses, attack_modifier, health_modifier=None):
+        self.item = Item(item_name, uses, attack_modifier, health_modifier)
     
     def get_event(self, event_time):
         match event_time:
@@ -44,3 +45,6 @@ class Card:
 
     def get_item_image(self):
         return self.image
+
+    def get_image_number(self):
+        return self.image_number
